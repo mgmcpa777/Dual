@@ -1,0 +1,96 @@
+
+    $(document).ready(function() {
+   $("#chat-box").delay(1000).fadeIn(100);
+});
+
+      $(document).ready(function () {
+      $("#mycanvas").click(function () {
+          $("#welcomeDiv").show();
+      });
+  });
+
+
+$(document).ready(function() {
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', '_Fm7-alert.mp3');
+
+    audioElement.addEventListener('ended', function() {
+        this.play();
+    }, false);
+
+
+     $('.map').click(function() {
+        audioElement.play();
+
+    });
+
+      $('.black').click(function() {
+        audioElement.play();
+
+    });
+
+
+       $('#footer').click(function() {
+        audioElement.play();
+
+    });
+
+        $('#poptxt').click(function() {
+        audioElement.play();
+
+    });
+
+
+
+
+
+});
+
+$("#footer").fadeIn('slow')
+.css({top: '75%', position: 'absolute'})
+.animate({top: '92%'}, 80, function() {
+    //callback
+});
+
+$(document).ready(function() {
+    $(".arow-div").delay(100).fadeIn(50);
+});
+
+
+
+$(document).ready(function(){
+    $("#footer").click(function(){
+        $('#poptxt').hide('fast');
+    });
+});
+
+$(document).ready(function(){
+    $(".black").click(function(){
+        $('.delayedPopupWindow').hide('fast');
+    });
+});
+// ===== Auto Fullscreen On First Interaction =====
+
+function enterFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.log("Fullscreen failed:", err);
+        });
+    }
+}
+
+function setupAutoFullscreen() {
+    const trigger = () => {
+        enterFullscreen();
+        document.removeEventListener("click", trigger);
+        document.removeEventListener("keydown", trigger);
+        document.removeEventListener("mousemove", trigger);
+    };
+
+    document.addEventListener("click", trigger);
+    document.addEventListener("keydown", trigger);
+    document.addEventListener("mousemove", trigger);
+}
+
+setupAutoFullscreen();
+
