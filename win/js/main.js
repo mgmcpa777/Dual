@@ -79,17 +79,34 @@ function enterFullscreen() {
     }
 }
 
+function enterFullscreen() {
+    const elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen(); // Safari
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen(); // IE11
+    }
+}
+
 function setupAutoFullscreen() {
     const trigger = () => {
         enterFullscreen();
+
+        // Remove all listeners after first trigger
+        document.removeEventListener("pointerdown", trigger);
         document.removeEventListener("click", trigger);
         document.removeEventListener("keydown", trigger);
-        document.removeEventListener("mousemove", trigger);
     };
 
-    document.addEventListener("click", trigger);
-    document.addEventListener("keydown", trigger);
-    document.addEventListener("mousemove", trigger);
+    // 🔥 Best modern trigger (covers mouse, touch, stylus)
+    document.addEventListener("pointerdown", trigger, { once: true });
+
+    // Fallbacks (extra safety)
+    document.addEventListener("click", trigger, { once: true });
+    document.addEventListener("keydown", trigger, { once: true });
 }
 
 setupAutoFullscreen();
